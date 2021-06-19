@@ -32,6 +32,7 @@ Memorandum is a web app where you can write everything you want to write breakin
 - Recoil.js
 - styled-components
 - axios
+- craco
 
 ## Getting started
 
@@ -43,4 +44,5 @@ Memorandum is a web app where you can write everything you want to write breakin
 
     visit the link right down below.
     ''
+
 # memorandum
