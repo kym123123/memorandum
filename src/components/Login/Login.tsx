@@ -5,9 +5,49 @@ import { BsArrowRight } from 'react-icons/bs';
 import { FaUserAlt } from 'react-icons/fa';
 import { AiFillLock } from 'react-icons/ai';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  InputNameType,
+  changeInputActionCreator,
+  initializeAllActionCreator,
+  requestLoginActionCreator,
+} from 'modules/auth';
+import { RootStateType } from 'modules/index';
 
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
+  const [passwordCheck, setPasswordCheck] = useState('');
+  const { email, password, nickname, authLoading } = useSelector(
+    (state: RootStateType) => state.auth,
+  );
+  const dispatch = useDispatch();
+
+  const changeAuthMode = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ): void => {
+    e.preventDefault();
+    setIsLogin((isLogin) => !isLogin);
+    dispatch(initializeAllActionCreator({}));
+    setPasswordCheck('');
+  };
+
+  const changeInputValue = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    dispatch(
+      changeInputActionCreator({
+        inputName: e.target.name as InputNameType,
+        content: e.target.value,
+      }),
+    );
+  };
+
+  const changePasswordCheckValue = (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ): void => setPasswordCheck(e.target.value);
+
+  const requestLogin = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+    dispatch(requestLoginActionCreator({ email, password }));
+  };
 
   return (
     <BackgroundContainer>
@@ -19,7 +59,7 @@ const Login = () => {
           <div className="deco-oval deco-oval-4"></div>
         </LoginFormLeft>
         {/* 로그인 폼 */}
-        <LoginForm>
+        <LoginForm onSubmit={requestLogin}>
           {/* 로고 */}
           <img
             src="./assets/images/logo.svg"
@@ -29,11 +69,36 @@ const Login = () => {
           <h1 className="login">{isLogin ? 'Login' : 'Sign Up'}</h1>
           <div className="input-container">
             <FaUserAlt className="email-icon" />
-            <Input placeholder="Email" name="email" />
+            <Input
+              placeholder="Email"
+              name="email"
+              value={email}
+              onChange={changeInputValue}
+            />
+            <div>잘못되었습니다.</div>
           </div>
+          {isLogin ? null : (
+            <div className="input-container">
+              <FaUserAlt className="email-icon" />
+              <Input
+                placeholder="Nickname"
+                name="nickname"
+                value={nickname}
+                onChange={changeInputValue}
+              />
+              <div>잘못되었습니다.</div>
+            </div>
+          )}
           <div className="input-container">
             <AiFillLock className="password-icon" />
-            <Input placeholder="Password" type="password" name="password" />
+            <Input
+              placeholder="Password"
+              type="password"
+              name="password"
+              value={password}
+              onChange={changeInputValue}
+            />
+            <div>잘못되었습니다.</div>
           </div>
           {isLogin ? null : (
             <div className="input-container">
@@ -42,20 +107,17 @@ const Login = () => {
                 placeholder="Password check"
                 type="password"
                 name="password-check"
+                value={passwordCheck}
+                onChange={changePasswordCheckValue}
               />
+              <div>잘못되었습니다.</div>
             </div>
           )}
           <Button className="form-button">
-            {isLogin ? 'Login' : 'Sign Up'}
+            {authLoading ? 'loading...' : isLogin ? 'Login' : 'Sign Up'}
           </Button>
           <div className="forgot-info">Forgot Email or Password?</div>
-          <button
-            className="sign-up"
-            onClick={(e) => {
-              e.preventDefault();
-              setIsLogin((isLogin) => !isLogin);
-            }}
-          >
+          <button className="sign-up" onClick={changeAuthMode}>
             {isLogin ? 'Create Your Account!' : 'Login with email'}
             <BsArrowRight className="sign-up-arrow" />
           </button>
@@ -77,7 +139,7 @@ const LoginFormContainer = styled.div`
   background: ${colors.generalBackground};
   display: flex;
   width: 700px;
-  height: 500px;
+  height: 540px;
   border-radius: 2rem;
   overflow: hidden;
   box-shadow: ${colors.generalBoxShadow};
@@ -100,7 +162,7 @@ const LoginForm = styled.form`
   position: relative;
   .logo {
     position: absolute;
-    top: 3.5rem;
+    top: 3rem;
   }
   h1 {
     width: 100%;
@@ -122,7 +184,7 @@ const LoginForm = styled.form`
         fill: #544e4e;
       }
     }
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
   }
   .form-button {
     font-size: 1.7rem;
