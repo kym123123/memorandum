@@ -60,14 +60,14 @@ const authSlice = createSlice({
         accessToken: payload.access_token,
         refreshToken: payload.refresh_token,
       };
-      state.password = '';
-      state.email = '';
       localStorage.setItem('AT', payload.access_token);
       localStorage.setItem('RT', payload.refresh_token);
       localStorage.setItem('ATET', payload.accessExpireTime);
       localStorage.setItem('RTET', payload.refreshExpireTime);
       localStorage.setItem('userNickname', payload.nickname);
       localStorage.setItem('userEmail', state.email);
+      state.password = '';
+      state.email = '';
     },
     requestLoginFailure: (state, { payload }: PayloadAction<any>) => {
       state.authLoading = false;
@@ -88,14 +88,14 @@ const authSlice = createSlice({
         accessToken: payload.access_token,
         refreshToken: payload.refresh_token,
       };
-      state.password = '';
-      state.email = '';
       localStorage.setItem('AT', payload.access_token);
       localStorage.setItem('RT', payload.refresh_token);
       localStorage.setItem('ATET', payload.accessExpireTime);
       localStorage.setItem('RTET', payload.refreshExpireTime);
       localStorage.setItem('userNickname', state.nickname);
       localStorage.setItem('userEmail', state.email);
+      state.password = '';
+      state.email = '';
     },
     requestSignUpFailure: (state, { payload }: PayloadAction<any>) => {
       state.authLoading = false;
