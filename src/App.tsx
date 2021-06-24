@@ -1,15 +1,17 @@
 import LoginPage from 'pages/LoginPage';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { RecoilRoot } from 'recoil';
 import MainPage from './pages/MainPage';
-
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Route path="/Login" exact component={LoginPage} />
-        <Route path="/" exact component={MainPage} />
-      </Switch>
-    </Router>
+    <RecoilRoot>
+      <Router>
+        <Switch>
+          <Route path="/login" component={LoginPage} />
+          <Route path="/" component={MainPage} />
+        </Switch>
+      </Router>
+    </RecoilRoot>
   );
 }
 
