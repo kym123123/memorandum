@@ -2,11 +2,14 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
+      "src/*": ["src/*"],
       "pages/*": ["src/pages/*"],
       "components/*": ["src/components/*"],
       "lib/*": ["src/lib/*"],
       "modules/*": ["src/modules/*"],
-      "sagas/*": ["src/sagas/*"]
+      "sagas/*": ["src/sagas/*"],
+      "recoils/*": ["src/recoils/*"],
+      "portal/*": ["src/portal/*"]
     }
   }
 }

@@ -1,7 +1,15 @@
-import React from 'react';
-import Login from 'components/Login/Login';
+import Auth from 'components/Auth/Auth';
+import { RootStateType } from 'modules/index';
+import { useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
-const LoginPage = () => {
-  return <Login />;
+const AuthPage = () => {
+  const { accessToken, refreshToken } = useSelector(
+    (state: RootStateType) => state.auth.user,
+  );
+
+  if (accessToken && refreshToken) return <Redirect to="/home" />;
+
+  return <Auth />;
 };
-export default LoginPage;
+export default AuthPage;
