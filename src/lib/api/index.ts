@@ -1,7 +1,7 @@
 import axios from 'axios';
 import renewToken from '../utils/renewToken';
 
-// login, logout, signup에만 사용하는 axios 인스턴스.
+// login, logout, signup,에만 사용하는 axios 인스턴스.
 export const lsAxios = axios.create({
   baseURL: 'http://localhost:3001/',
 });

@@ -2,13 +2,16 @@ import { configureStore } from '@reduxjs/toolkit';
 import authSlice from './auth';
 import createSagaMiddleware from '@redux-saga/core';
 import rootSaga from 'sagas/index';
-import { AuthInitialStateType } from './types';
+import { AuthInitialStateType, NewsInitialStateType } from './types';
+import newsSlice from './news';
 export type RootStateType = {
   auth: AuthInitialStateType;
+  news: NewsInitialStateType;
 };
 
 const reducer = {
   auth: authSlice.reducer,
+  news: newsSlice.reducer,
 };
 
 const sagaMiddleware = createSagaMiddleware();

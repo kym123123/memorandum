@@ -3,11 +3,14 @@ import styled from 'styled-components';
 import { FaUserCircle } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import { RootStateType } from 'src/modules';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 const UserInfo = () => {
   const { email, nickname } = useSelector(
     (state: RootStateType) => state.auth.user,
   );
+
   return (
     <UserInfoContainer>
       {/* 유저 아이콘 */}
@@ -33,12 +36,14 @@ const UserInfoContainer = styled.section`
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
   backdrop-filter: blur(19px);
   -webkit-backdrop-filter: blur(19px);
-  border-radius: 10px;
   border-radius: 1.5rem;
   display: flex;
   padding: 1rem 0.3rem;
   align-items: center;
   justify-content: space-evenly;
+  @media screen and (max-width: 1110px) {
+    display: none;
+  }
 `;
 
 const UserNickNameEmailContainer = styled.ul`

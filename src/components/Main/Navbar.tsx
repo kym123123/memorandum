@@ -10,7 +10,6 @@ import { useRecoilState } from 'recoil';
 import { isModalOpenState } from 'recoils/index';
 import Portal from 'portal/index';
 import LogoutModal from './LogoutModal';
-import renewToken from 'src/lib/utils/renewToken';
 import { test } from 'src/lib/api/auth';
 
 const Navbar = () => {
@@ -82,7 +81,7 @@ const Navbar = () => {
           <div className="navbar-text">Logout</div>
         </li>
       </NavbarContainer>
-      <button
+      {/* <button
         onClick={async () => {
           const res = await test();
 
@@ -94,7 +93,7 @@ const Navbar = () => {
         }}
       >
         click
-      </button>
+      </button> */}
       {isModalOpen && (
         <Portal>
           <LogoutModal />
@@ -127,6 +126,7 @@ const NavbarContainer = styled.ul`
     }
     .navbar-text {
       font-size: 1.7rem;
+      font-weight: 300;
     }
     &:hover {
       background: rgba(255, 255, 255, 0.5);
@@ -143,6 +143,33 @@ const NavbarContainer = styled.ul`
     width: calc(100% - 3.5rem);
     position: absolute;
     bottom: 1rem;
+  }
+  @media screen and (max-width: 1110px) {
+    width: 100%;
+    height: 10rem;
+    display: flex;
+    justify-content: center;
+    .navbar-item {
+      width: 100%;
+      margin-top: 2rem;
+    }
+    .navbar-item.logout {
+      width: 10rem;
+      position: static;
+      height: 4.5rem;
+    }
+  }
+  @media screen and (max-width: 700px) {
+    .navbar-item {
+      flex-direction: column;
+
+      .navbar-text {
+        font-size: 1.2rem;
+      }
+      .navbar-icon {
+        margin-right: 0rem;
+      }
+    }
   }
 `;
 export default Navbar;

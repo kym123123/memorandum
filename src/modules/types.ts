@@ -32,3 +32,18 @@ export type RequestLogoutPayload = {
   access_token: string;
   refresh_token: string;
 };
+
+export type NewsObjType = {
+  publishedAt: Date;
+  title: string;
+  description: string;
+  url: string;
+  urlToImage: string;
+};
+
+export type NewsInitialStateType = {
+  category: string;
+  newsLoading: boolean;
+  newsError: null | Error;
+  newsArr: NewsObjType[];
+};

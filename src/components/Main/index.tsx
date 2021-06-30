@@ -22,15 +22,14 @@ const BackgroundContainer = styled.div`
   height: 100vh;
   display: flex;
   position: relative;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 `;
 
 const OuterContainer = styled.div`
-  min-height: 70rem;
   height: 90vh;
   max-height: 100rem;
-  width: 120rem;
+  width: 100%;
   margin: 0 auto;
   border-radius: 1rem;
   background: rgba(230, 219, 233, 0.35);

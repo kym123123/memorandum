@@ -22,12 +22,24 @@ const Header = () => {
 
 const HeaderOuterContainer = styled.div`
   width: 30rem;
-  height: 100vh;
   padding: 2rem 0 2rem 2rem;
+  @media screen and (max-width: 1380px) {
+    height: 100%;
+  }
+  @media screen and (max-width: 1110px) {
+    width: 100%;
+    height: 10rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    padding: 1rem 2rem;
+  }
 `;
 
 const HeaderInnerContainer = styled.header`
   height: 100%;
+  max-height: 100%;
   width: 24rem;
   background: rgba(255, 255, 255, 0.2);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
@@ -36,14 +48,13 @@ const HeaderInnerContainer = styled.header`
   border-radius: 2rem;
   padding: 2rem;
   position: relative;
-  animation: appear1 0.4s ease-in;
-  @keyframes appear1 {
-    0% {
-      transform: translate(-100%, 0);
-    }
-    100% {
-      transform: translate(0, 0);
-    }
+
+  @media screen and (max-width: 1110px) {
+    width: 100%;
+    height: 10rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 `;
 
@@ -56,7 +67,6 @@ const HeaderDots = styled.ul`
     width: 1rem;
     height: 1rem;
     border-radius: 50%;
-    background-color: blue;
   }
   .dot-red {
     background-color: rgba(255, 93, 79);
@@ -66,6 +76,11 @@ const HeaderDots = styled.ul`
   }
   .dot-green {
     background-color: rgba(55, 216, 166);
+  }
+  @media screen and (max-width: 1110px) {
+    position: absolute;
+    top: 1rem;
+    left: 2rem;
   }
 `;
 

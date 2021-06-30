@@ -26,20 +26,41 @@ const MainPage = () => {
   if (!accessToken || !refreshToken) return <Redirect to="/login" />;
 
   return (
-    <MainContainer>
-      <Header />
-      <Route path={'/home'} component={Home} />
-      <Route path={'/memo'} component={Memo} />
-      <Route />
-    </MainContainer>
+    <OuterMainContainer>
+      <MainContainer>
+        <Header />
+        <Route path={'/home'} component={Home} />
+        <Route path={'/memo'} component={Memo} />
+        <Route />
+      </MainContainer>
+    </OuterMainContainer>
   );
 };
-const MainContainer = styled.div`
-  display: flex;
 
+const OuterMainContainer = styled.div`
   background-image: url('/assets/images/mainbackground.jpeg');
   background-repeat: no-repeat;
   background-size: cover;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @media screen and (max-width: 1380px) {
+    height: 100vh;
+    overflow-y: scroll;
+  }
+`;
+
+const MainContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 1400px;
+  height: 100%;
+  min-height: 650px;
+  @media screen and (max-width: 1110px) {
+    flex-direction: column;
+    width: 100%;
+  }
 `;
 
 export default MainPage;

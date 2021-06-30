@@ -1,8 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { isPast } from 'date-fns';
-import Axios from '../api';
 
-// Promise<AxiosRequestConfig>
 const renewTokenReq = async (
   config: AxiosRequestConfig,
 ): Promise<AxiosRequestConfig> => {
@@ -19,9 +17,11 @@ const renewTokenReq = async (
       Authorization: `Bearer ${access_token}`,
     },
   };
-  console.log(config);
 
-  if (isPast(access_token_ext - 5) || isPast(refresh_token_ext - 5)) {
+  if (
+    isPast(access_token_ext * 1000 - 5) ||
+    isPast(refresh_token_ext * 1000 - 5)
+  ) {
     const res = await axios.post(
       'http://localhost:3001/user/renewToken',
       body,
