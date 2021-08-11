@@ -23,7 +23,7 @@ const renewTokenReqConfig = async (
     isPast(refresh_token_ext * 1000 - 5)
   ) {
     const res = await axios.post(
-      'http://localhost:3001/user/renewToken',
+      process.env.REACT_APP_BS as string,
       body,
       headers,
     );

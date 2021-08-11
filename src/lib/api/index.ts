@@ -3,12 +3,12 @@ import renewToken from '../utils/renewToken';
 
 // login, logout, signup,에만 사용하는 axios 인스턴스.
 export const lsAxios = axios.create({
-  baseURL: 'http://localhost:3001/',
+  baseURL: process.env.REACT_APP_BS as string,
 });
 
 // header에 access token을 담아서 전송
 const Axios = axios.create({
-  baseURL: 'http://localhost:3001/',
+  baseURL: process.env.REACT_APP_BS as string,
   headers: { Authorization: `Bearer ${localStorage.getItem('AT')}` },
 });
 
