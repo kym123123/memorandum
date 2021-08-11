@@ -1,23 +1,45 @@
+import { PayloadAction } from '@reduxjs/toolkit';
 import { AxiosResponse } from 'axios';
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { getNews } from 'src/lib/api/home';
+import { CategoryType } from 'src/components/Main/News/types';
+import { getNews, getNewsByCategory } from 'src/lib/api/news';
 import {
+  requestCategoryNewsActionCreator,
+  requestCategoryNewsFailureActionCreator,
+  requestCategoryNewsSuccessActionCreator,
   requestNewsActionCreator,
   requestNewsFailureActionCreator,
   requestNewsSuccessActionCreator,
 } from 'src/modules/news';
+import { CategoryPayloadType } from 'src/modules/types';
+
+type ArticleType = {
+  author: string;
+  content: string;
+  description: string;
+  publishedAt: string;
+  source: { id: string; name: string };
+  title: string;
+  url: string;
+  urlToImage: string;
+};
 
 // watcher saga
 export function* newsWatcherSaga() {
   yield takeLatest(requestNewsActionCreator.type, requestNewsWorkerSaga);
+  yield takeLatest(
+    requestCategoryNewsActionCreator.type,
+    requestCategoryNewsWorkerSaga,
+  );
 }
 
 // worker saga
 function* requestNewsWorkerSaga() {
   try {
-    const res: AxiosResponse = yield call(getNews);
-    console.log(res.data.articles);
-    const arrangedArticles = res.data.articles.map((article: any) => ({
+    const { data }: AxiosResponse = yield call(getNews);
+    console.log(data.articles, 'articles');
+
+    const arrangedArticles = data.articles.map((article: ArticleType) => ({
       publishedAt: article.publishedAt,
       title: article.title,
       description: article.description,
@@ -29,5 +51,23 @@ function* requestNewsWorkerSaga() {
   } catch (e) {
     console.log(e);
     yield put(requestNewsFailureActionCreator({ e }));
+  }
+}
+
+function* requestCategoryNewsWorkerSaga({
+  payload,
+}: PayloadAction<CategoryPayloadType>) {
+  try {
+    const { data }: AxiosResponse = yield call(() =>
+      getNewsByCategory(payload.category),
+    );
+    console.log(data);
+
+    yield put(
+      requestCategoryNewsSuccessActionCreator({ newsArr: data.articles }),
+    );
+  } catch (e) {
+    console.log(e);
+    yield put(requestCategoryNewsFailureActionCreator({ e }));
   }
 }

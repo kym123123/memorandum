@@ -8,7 +8,7 @@ const AuthPage = () => {
     (state: RootStateType) => state.auth.user,
   );
 
-  if (accessToken && refreshToken) return <Redirect to="/home" />;
+  if (accessToken && refreshToken) return <Redirect to="/" />;
 
   return <Auth />;
 };

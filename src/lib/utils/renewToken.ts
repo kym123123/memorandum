@@ -1,7 +1,7 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { isPast } from 'date-fns';
 
-const renewTokenReq = async (
+const renewTokenReqConfig = async (
   config: AxiosRequestConfig,
 ): Promise<AxiosRequestConfig> => {
   const refresh_token = localStorage.getItem('RT');
@@ -41,9 +41,14 @@ const renewTokenReq = async (
   }
   return config;
 };
-const renewTokenRes = (err: any) => {
-  console.log(err);
 
-  return Promise.reject(err);
+const renewTokenReqError = (error: AxiosError) => {
+  // request Error handling
 };
-export default { renewTokenReq, renewTokenRes };
+
+const renewTokenRes = (response: AxiosResponse) => {
+  // 서버에서 내려준 값이 unAuthorized이면 token 갱신 api호출.
+};
+export default { renewTokenReqConfig, renewTokenReqError, renewTokenRes };
+
+// https://github.com/axios/axios#interceptors

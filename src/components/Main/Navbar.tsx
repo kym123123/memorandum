@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { BiNews } from 'react-icons/bi';
 import { RiDashboardLine, RiHome4Line } from 'react-icons/ri';
-import { FaRegStickyNote } from 'react-icons/fa';
 import { GrLogout } from 'react-icons/gr';
 import { BsCalendar } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
@@ -10,10 +9,12 @@ import { useRecoilState } from 'recoil';
 import { isModalOpenState } from 'recoils/index';
 import Portal from 'portal/index';
 import LogoutModal from './LogoutModal';
-import { test } from 'src/lib/api/auth';
+import { useSelector } from 'react-redux';
+import { RootStateType } from 'src/modules';
 
 const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useRecoilState(isModalOpenState);
+  const { category } = useSelector((state: RootStateType) => state.news);
 
   useEffect(() => {
     console.log(isModalOpen);
@@ -22,7 +23,7 @@ const Navbar = () => {
   return (
     <>
       <NavbarContainer>
-        <Link to="/home">
+        <Link to="/">
           <li className="navbar-item home">
             <RiHome4Line
               size={25}
@@ -42,7 +43,7 @@ const Navbar = () => {
             <div className="navbar-text">Board</div>
           </li>
         </Link>
-        <Link to="/news">
+        <Link to={`/news/${category}`}>
           <li className="navbar-item home">
             <BiNews
               size={25}
@@ -50,16 +51,6 @@ const Navbar = () => {
               color="rgb(82,51,82)"
             />
             <div className="navbar-text">News</div>
-          </li>
-        </Link>
-        <Link to="/home">
-          <li className="navbar-item home">
-            <FaRegStickyNote
-              size={25}
-              className="memo-icon navbar-icon"
-              color="rgb(82,51,82)"
-            />
-            <div className="navbar-text">Memo</div>
           </li>
         </Link>
         <Link to="/schedule">

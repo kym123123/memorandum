@@ -58,9 +58,6 @@ const HomeOuterContainer = styled.div`
   padding: 2rem;
   margin: 0 auto;
   overflow-y: scroll;
-  @media screen and (max-width: 1110px) {
-    margin-top: 8rem;
-  }
 `;
 
 const HomeInnerContainer = styled.main`

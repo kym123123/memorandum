@@ -11,7 +11,7 @@ import {
   useRouteMatch,
 } from 'react-router-dom';
 import Home from './Home';
-import Memo from './Memo';
+// import Memo from 'components/Main/Memo/index';
 
 const LowerMain = () => {
   const history = useHistory();
@@ -50,7 +50,7 @@ const LowerMain = () => {
         <MainContainer>
           <Switch>
             <Route exact path="/Home" component={Home} />
-            <Route exact path="/Memo" component={Memo} />
+            {/* <Route exact path="/Memo" component={Memo} /> */}
           </Switch>
         </MainContainer>
       </LowerMainContainer>

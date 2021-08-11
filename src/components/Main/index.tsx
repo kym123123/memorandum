@@ -9,7 +9,6 @@ const Main = () => {
       <OuterContainer>
         {/* 상단 nav */}
         <Header />
-
         {/* 하단 전체 컨테이너 */}
         <LowerMain />
       </OuterContainer>

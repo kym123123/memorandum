@@ -1,3 +1,5 @@
+import { CategoryType } from 'src/components/Main/News/types';
+
 export type InputNameType = 'email' | 'nickname' | 'password';
 
 export type AuthInitialStateType = {
@@ -40,10 +42,32 @@ export type NewsObjType = {
   url: string;
   urlToImage: string;
 };
+export type CategoryNewsObjType = {
+  author: string;
+  content: string;
+  description: string;
+  publishedAt: string;
+  source: { id: null | string; name: string };
+  title: string;
+  url: string;
+  urlToImage: string;
+};
 
 export type NewsInitialStateType = {
-  category: string;
+  category: CategoryType;
   newsLoading: boolean;
   newsError: null | Error;
   newsArr: NewsObjType[];
+  newsByCategory: {
+    business: CategoryNewsObjType[];
+    entertainment: CategoryNewsObjType[];
+    health: CategoryNewsObjType[];
+    science: CategoryNewsObjType[];
+    sports: CategoryNewsObjType[];
+    technology: CategoryNewsObjType[];
+  };
+};
+
+export type CategoryPayloadType = {
+  category: CategoryType;
 };

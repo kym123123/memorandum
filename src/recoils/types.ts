@@ -9,6 +9,7 @@ export type WeatherStateType = {
   icon: string;
 };
 
+export type CurrentPositionStateType = { lat: string; lon: string };
 export type WeeklyWeatherStateType = {
   dt: number; // date
   temp: {

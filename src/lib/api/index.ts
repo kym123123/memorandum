@@ -12,24 +12,12 @@ const Axios = axios.create({
   headers: { Authorization: `Bearer ${localStorage.getItem('AT')}` },
 });
 
+// request interceptor
 Axios.interceptors.request.use(
-  renewToken.renewTokenReq,
-  renewToken.renewTokenRes,
+  renewToken.renewTokenReqConfig, // request config
+  renewToken.renewTokenReqError, // request error handling
 );
 
-Axios.interceptors.response.use(
-  (response) => {
-    console.log(response);
-
-    return response;
-  },
-  async (err) => {
-    const originalRequest = err.config;
-    console.log(err.response.data);
-
-    if (err.response.status === 401) {
-      console.log('error unauthorized');
-    }
-  },
-);
+// response interceptor
+// Axios.interceptors.response.use(renewToken.renewTokenRes);
 export default Axios;

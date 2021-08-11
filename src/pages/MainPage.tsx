@@ -1,6 +1,8 @@
 import Header from 'components/Main/Header';
 import Home from 'components/Main/Home/index';
-import Memo from 'components/Main/Memo';
+import News from 'components/Main/News/index';
+import Board from 'components/Main/Board/index';
+import Schedule from 'components/Main/Schedule/index';
 import { RootStateType } from 'modules/index';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
@@ -10,7 +12,7 @@ import { isModalOpenState } from 'src/recoils';
 import styled from 'styled-components';
 
 const MainPage = () => {
-  const setOpenModal = useSetRecoilState(isModalOpenState);
+  const setOpenModal = useSetRecoilState(isModalOpenState); // logout modal
   const { accessToken, refreshToken } = useSelector(
     (state: RootStateType) => state.auth.user,
   );
@@ -29,9 +31,10 @@ const MainPage = () => {
     <OuterMainContainer>
       <MainContainer>
         <Header />
-        <Route path={'/home'} component={Home} />
-        <Route path={'/memo'} component={Memo} />
-        <Route />
+        <Route path={'/'} component={Home} exact />
+        <Route path={'/news/:category'} component={News} />
+        <Route path={'/board'} component={Board} />
+        <Route path={'/schedule'} component={Schedule} />
       </MainContainer>
     </OuterMainContainer>
   );
@@ -57,9 +60,11 @@ const MainContainer = styled.div`
   width: 1400px;
   height: 100%;
   min-height: 650px;
+
   @media screen and (max-width: 1110px) {
     flex-direction: column;
     width: 100%;
+    margin-top: 17rem;
   }
 `;
 

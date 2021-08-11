@@ -61,6 +61,7 @@ const HomeNewsEachContainer = styled.div`
     height: 60%;
     object-fit: contain;
     margin-bottom: 1rem;
+    border-radius: 1rem;
   }
   .news-each-title {
     overflow: hidden;

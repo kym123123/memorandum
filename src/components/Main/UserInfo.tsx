@@ -1,10 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { FaUserCircle } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import { RootStateType } from 'src/modules';
-import { useState } from 'react';
-import { useEffect } from 'react';
 
 const UserInfo = () => {
   const { email, nickname } = useSelector(
